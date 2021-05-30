@@ -37,7 +37,7 @@ exports.deleteGatewayById = async (req, res, json) => {
   try {
     const deleteResult = await gatewaysModel.deleteOne({ _id });
     console.log(deleteResult);
-    return res.status(204);
+    return res.status(204).json({});
   } catch (error) {
     return res.status(400).json({ error: error });
   }
