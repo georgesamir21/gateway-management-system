@@ -8,5 +8,4 @@ fs.readdirSync(__dirname)
     const model = require(path.join(__dirname, file))();
     models[`${file.split('.')[0]}Model`] = model;   
   });
-console.log(models)
 module.exports = models;
