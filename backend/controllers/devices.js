@@ -1,6 +1,6 @@
 const { devicesModel } = require('../models');
 
-exports.getAllDevices = async (req, res, next) => {
+exports.getAllDevices = async (req, res) => {
   try {
     const devices = await devicesModel.find({});
     return res.status(200).json({ data: devices });
@@ -9,7 +9,7 @@ exports.getAllDevices = async (req, res, next) => {
   }
 };
 
-exports.getDeviceById = async (req, res, next) => {
+exports.getDeviceById = async (req, res) => {
   try {
     const _id = req.params.id;
     const device = await devicesModel.findOne({ _id });
@@ -19,7 +19,7 @@ exports.getDeviceById = async (req, res, next) => {
   }
 };
 
-exports.updateDeviceById = async (req, res, next) => {
+exports.updateDeviceById = async (req, res) => {
   try {
     const _id = req.params.id;
     const { body } = req;
@@ -32,7 +32,7 @@ exports.updateDeviceById = async (req, res, next) => {
   }
 };
 
-exports.deleteDeviceById = async (req, res, next) => {
+exports.deleteDeviceById = async (req, res) => {
   try {
     const _id = req.params.id;
     await devicesModel.deleteOne({ _id });
@@ -42,7 +42,7 @@ exports.deleteDeviceById = async (req, res, next) => {
   }
 };
 
-exports.addDevice = async (req, res, next) => {
+exports.addDevice = async (req, res) => {
   try {
     const { uid = undefined, vendor, status, gateway } = req.body;
     const device = new devicesModel({

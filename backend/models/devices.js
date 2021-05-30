@@ -33,4 +33,4 @@ module.exports = () => {
 
   const Device = model('Device', deviceShema);
   return Device;
-}
+};

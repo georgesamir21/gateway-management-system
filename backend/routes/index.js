@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const basename = path.basename(__filename)
+const basename = path.basename(__filename);
 const routes = {};
 fs.readdirSync(__dirname)
   .filter((file) => file !== basename && file.slice(-3) === '.js')

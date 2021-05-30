@@ -1,25 +1,30 @@
 const { gatewaysModel } = require('../models');
 
-exports.getAllgateways = async (req, res, next) => {
+exports.getAllgateways = async (req, res) => {
   try {
-    const gateways = await gatewaysModel.find();
+    const perPage = req.query.perPage;
+    const gateways = await gatewaysModel
+      .find()
+      .skip(0)
+      .limit(+perPage)
+      .populate('devices');
     return res.status(200).json({ data: gateways });
   } catch (error) {
     return res.status(400).json({ error: error });
   }
 };
 
-exports.getGatewayById = async (req, res, json) => {
+exports.getGatewayById = async (req, res) => {
   const _id = req.params.id;
   try {
-    const gateway = await gatewaysModel.findOne({ _id });
+    const gateway = await gatewaysModel.findOne({ _id }).populate('devices');
     return res.status(200).json({ data: gateway });
   } catch (error) {
     return res.status(400).json({ error: error });
   }
 };
 
-exports.updateGateway = async (req, res, json) => {
+exports.updateGateway = async (req, res) => {
   const _id = req.params.id;
   const body = req.body;
   try {
@@ -32,7 +37,7 @@ exports.updateGateway = async (req, res, json) => {
   }
 };
 
-exports.deleteGatewayById = async (req, res, json) => {
+exports.deleteGatewayById = async (req, res) => {
   const _id = req.params.id;
   try {
     const deleteResult = await gatewaysModel.deleteOne({ _id });
@@ -43,7 +48,7 @@ exports.deleteGatewayById = async (req, res, json) => {
   }
 };
 
-exports.addGateway = async (req, res, next) => {
+exports.addGateway = async (req, res) => {
   try {
     const {
       name,
