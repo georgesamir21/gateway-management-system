@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BASE_URL } from './api/variables';
+import { environment } from './../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ApiModule } from './api/api.module';
 
 @NgModule({
   declarations: [
@@ -10,9 +13,15 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ApiModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: BASE_URL,
+      useValue: environment.baseApiUrl
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
